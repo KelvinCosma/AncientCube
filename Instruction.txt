@@ -1,0 +1,9 @@
+For my Team :
+copy folder CodeBlocks ke tempat Folder CodeBlocks mu berada
+copy folder Windows ke Folder Windows yang terdapat pada Local Disk (C:)
+
+Pengisian Linker Settings disesuaikan dengan yang ada pada gambar LinkerSettings.jpg
+(Untuk Link Libraries diisi dengan menggunakan browse(Klik Button Add))
+
+Contoh Code untuk kepastian bahwa instalasi dilakukan dengan benar.
+ 
