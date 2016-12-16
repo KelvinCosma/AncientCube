@@ -1,0 +1,27 @@
+# depslib dependency file v1.0
+1481859246 source:d:\program\save\code blocks\semester_v\testing\alpha\alpha.cpp
+	<GL/glew.h>
+	<GL/glfw3.h>
+	<glm/glm.hpp>
+	<glm/gtx/transform.hpp>
+	<glm/gtc/matrix_transform.hpp>
+	<glm/gtc/type_ptr.hpp>
+	<iostream>
+	<stdlib.h>
+	<math.h>
+	"shader.h"
+
+1481712204 d:\program\save\code blocks\semester_v\testing\alpha\shader.h
+	<string>
+	<fstream>
+	<sstream>
+	<iostream>
+	<GL/glew.h>
+
+1481737535 d:\program\save\code blocks\semester_v\testing\alpha\camera.h
+	<vector>
+	<GL/glew.h>
+	<glm/glm.hpp>
+	<glm/gtc/matrix_transform.hpp>
+	<glm/gtx/transform.hpp>
+
