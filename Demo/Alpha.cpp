@@ -22,8 +22,11 @@ void MouseCallback(GLFWwindow *window, double xPos, double yPos);
 glm::vec3 position = glm::vec3(-3.0f, 3.0f, -3.0f);
 glm::vec3 viewDirection = glm::vec3(1.0f, -1.0f, 1.0f);
 glm::vec3 strafeDirection;
-const glm::vec3 UP = glm::vec3(0.0f, 1.0f, 0.0f);
+glm::vec3 RIGHT;
+glm::vec3 UP = glm::vec3(0.0f, 1.0f, 0.0f);
 glm::vec2 oldMousePosition;
+
+bool perspective = false;
 
 const float MOVEMENT_SPEED = 0.1f;
 const float ROTATIONAL_SPEED = 0.005f;
@@ -114,7 +117,7 @@ int main() {
         1.0f, -1.0f, -1.0f,     0.0f, 1.0f, 1.0f,
 
         -1.0f, 1.0f, 1.0f,     0.0f, 0.0f, 1.0f,
-        -1.0f, 1.0f, -1.0f,     01.0f, 0.0f, 1.0f,
+        -1.0f, 1.0f, -1.0f,     0.0f, 0.0f, 1.0f,
         -1.0f, -1.0f, -1.0f,     0.0f, 0.0f, 1.0f,
         -1.0f, -1.0f, 1.0f,     0.0f, 0.0f, 1.0f,
 
@@ -142,8 +145,8 @@ int main() {
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (void*)0);
     glEnableVertexAttribArray(0);
 
-    glBindBuffer(GL_ARRAY_BUFFER, VBO0);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Svertices_color), Svertices_color, GL_STATIC_DRAW);
+    //glBindBuffer(GL_ARRAY_BUFFER, VBO0);
+    //glBufferData(GL_ARRAY_BUFFER, sizeof(Svertices_color), Svertices_color, GL_STATIC_DRAW);
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (void*)(3 * sizeof(GLfloat)));
     glEnableVertexAttribArray(1);
 
@@ -209,16 +212,23 @@ int main() {
 
         glm::mat4 model;
         glm::mat4 view;
+        glm::mat4 tempview;
 
         projection = glm::perspective(glm::radians(zoom), (float)WIDTH / (float)HEIGHT, 0.1f, 100.0f);
-/*
-        view = glm::lookAt(
-        glm::vec3(8,6,6), // Camera is at (4,3,3), in World Space
-        glm::vec3(0,0,0), // and looks at the origin
-        glm::vec3(0,1,0)  // Head is up (set to 0,-1,0 to look upside-down)
-        );
-*/
-        view = glm::lookAt(position, position + viewDirection, UP);
+
+        if(perspective) {
+            view = glm::lookAt(
+                glm::vec3(8,6,6), // Camera is at (4,3,3), in World Space
+                glm::vec3(1,1,1), // and looks at the origin
+                glm::vec3(0,1,0)  // Head is up (set to 0,-1,0 to look upside-down)
+            );
+            position = glm::vec3(8,6,6);
+            RIGHT = glm::vec3(1,1,1);
+            viewDirection = RIGHT - position;
+        }
+        else {
+            view = glm::lookAt(position, RIGHT, UP);
+        }
 
         model = glm::translate(model, glm::vec3(0.0f, dy, 0.0f));
         model *= glm::rotate(model, (GLfloat)glfwGetTime() * -1.0f, glm::vec3(x, y, z));
@@ -233,7 +243,9 @@ int main() {
         glDrawArrays(GL_QUADS, 0, 24);
         //glDrawElements(GL_QUADS, 24, GL_UNSIGNED_SHORT, 0);
 
-        MVP = projection * view * glm::mat4(1.0f);
+        glm::mat4 idlemodel = glm::mat4(1.0f);
+
+        MVP = projection * view * idlemodel;
 
         glUniformMatrix4fv(mvpLoc, 1, GL_FALSE, glm::value_ptr(MVP));
 
@@ -253,10 +265,11 @@ void KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mode
 {
     if(key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {glfwSetWindowShouldClose(window, GL_TRUE);}
 
+    if(key == GLFW_KEY_P && action == GLFW_PRESS){ perspective = perspective ^ true; }
+
     if(key == GLFW_KEY_Q || key == GLFW_KEY_E){
         if (key == GLFW_KEY_Q) {
             glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
             cout << "Q Pressed" << endl;
         }
         else if (key == GLFW_KEY_E) {
@@ -296,7 +309,7 @@ void MouseCallback(GLFWwindow *window, double xPos, double yPos)
 	glm::mat4 rotator = glm::rotate(-1 * mouseDelta.x * ROTATIONAL_SPEED, UP) *
 			glm::rotate(-1 * mouseDelta.y * ROTATIONAL_SPEED, strafeDirection);
 
-	viewDirection = glm::mat3(rotator) * viewDirection;
-
+    viewDirection = glm::mat3(rotator) * viewDirection;
+    RIGHT = position + viewDirection;
 	oldMousePosition = newMousePosition;
 }

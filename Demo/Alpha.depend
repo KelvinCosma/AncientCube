@@ -24,3 +24,21 @@
 	<glm/gtc/matrix_transform.hpp>
 	<glm/gtx/transform.hpp>
 
+1482223451 source:e:\projects\grafika\ancientcube\demo\alpha.cpp
+	<GL/glew.h>
+	<GL/glfw3.h>
+	<glm/glm.hpp>
+	<glm/gtx/transform.hpp>
+	<glm/gtc/matrix_transform.hpp>
+	<glm/gtc/type_ptr.hpp>
+	<iostream>
+	<stdlib.h>
+	"shader.h"
+
+1482222660 e:\projects\grafika\ancientcube\demo\shader.h
+	<string>
+	<fstream>
+	<sstream>
+	<iostream>
+	<GL/glew.h>
+
