@@ -78,6 +78,19 @@ int main() {
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     Shader ourShader("VertexShaderCode.vert", "FragmentShaderCode.frag");
+/*
+    GLfloat Svertices[] = {
+        -1.0f, 1.0f, 1.0f,  1.0f, 0.0f, 0.0f,
+        1.0f, 1.0f, 1.0f,  1.0f, 0.0f, 0.0f,
+        1.0f, -1.0f, 1.0f,  1.0f, 0.0f, 0.0f,
+        -1.0f, -1.0f, 1.0f,  1.0f, 0.0f, 0.0f,
+
+        -1.0f, 1.0f, -1.0f,  1.0f, 0.0f, 0.0f,
+        1.0f, 1.0f, -1.0f,  0.0f, 0.0f, 1.0f,
+        1.0f, -1.0f, -1.0f,  1.0f, 0.0f, 0.0f,
+        -1.0f, -1.0f, -1.0f,  1.0f, 0.0f, 0.0f
+    };
+*/
 
 	GLfloat Svertices[] = {
         -1.0f, 1.0f, 1.0f,     1.0f, 0.0f, 0.0f,
@@ -101,18 +114,21 @@ int main() {
         1.0f, -1.0f, -1.0f,     0.0f, 1.0f, 1.0f,
 
         -1.0f, 1.0f, 1.0f,     0.0f, 0.0f, 1.0f,
-        -1.0f, 1.0f, -1.0f,     0.0f, 0.0f, 1.0f,
+        -1.0f, 1.0f, -1.0f,     01.0f, 0.0f, 1.0f,
         -1.0f, -1.0f, -1.0f,     0.0f, 0.0f, 1.0f,
         -1.0f, -1.0f, 1.0f,     0.0f, 0.0f, 1.0f,
 
         -1.0f, -1.0f, 1.0f,     1.0f, 0.0f, 1.0f,
         1.0f, -1.0f, 1.0f,     1.0f, 0.0f, 1.0f,
         1.0f, -1.0f, -1.0f,     1.0f, 0.0f, 1.0f,
-        -1.0f, -1.0f, -1.0f,     1.0f, 0.0f, 1.0f,
+        -1.0f, -1.0f, -1.0f,     1.0f, 0.0f, 1.0f
     };
 
     GLfloat Tvertices[] = {
-
+        -1.0f, -2.0f, 1.0f,     1.0f, 0.5f, 0.0f,
+        1.0f, -2.0f, 1.0f,     1.0f, 0.5f, 0.0f,
+        1.0f, -2.0f, -1.0f,     1.0f, 0.5f, 0.0f,
+        -1.0f, -2.0f, -1.0f,     1.0f, 0.5f, 0.0f
     };
 
 	GLuint VAO0, VBO0;
@@ -121,8 +137,23 @@ int main() {
 
     glBindVertexArray(VAO0);
     glBindBuffer(GL_ARRAY_BUFFER, VBO0);
-
     glBufferData(GL_ARRAY_BUFFER, sizeof(Svertices), Svertices, GL_STATIC_DRAW);
+
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (void*)0);
+    glEnableVertexAttribArray(0);
+
+    glBindBuffer(GL_ARRAY_BUFFER, VBO0);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Svertices_color), Svertices_color, GL_STATIC_DRAW);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (void*)(3 * sizeof(GLfloat)));
+    glEnableVertexAttribArray(1);
+
+    GLuint VAO1, VBO1;
+    glGenVertexArrays(1, &VAO1);
+    glGenBuffers(1, &VBO1);
+
+    glBindVertexArray(VAO1);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO1);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Tvertices), Tvertices, GL_STATIC_DRAW);
 
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (void*)0);
     glEnableVertexAttribArray(0);
@@ -130,8 +161,17 @@ int main() {
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (void*)(3 * sizeof(GLfloat)));
     glEnableVertexAttribArray(1);
 
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
 
+    GLushort Sindices[] = {
+        4,5,1,0, 0,1,2,3, 1,5,6,2, 4,5,6,7, 4,0,3,7, 7,6,2,3
+    };
+
+	GLuint EAB0;
+	glGenBuffers(1, &EAB0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EAB0);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Sindices), Sindices, GL_STATIC_DRAW);
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 
 	glm::mat4 projection;
@@ -145,22 +185,20 @@ int main() {
 
         r = rand() % 9;
 
-        if (r >= 0 && r <= 8) {
-            if (r >= 0 && r <= 2) {
-                if (x <= 0) {cx = 0.0005f;}
-                else if (x >= 1) {cx = -0.0005f;}
-                x += cx;
-            }
-            if (r >= 2 && r <= 5) {
-                if (y <= 0) {cy = 0.0005f;}
-                else if (y >= 1) {cy = -0.0005f;}
-                y += cy;
-            }
-            if (r >= 6 && r <= 8) {
-                if (z <= 0) {cz = 0.0005f;}
-                else if (z >= 1) {cz = -0.0005f;}
-                z += cz;
-            }
+        if (r >= 0 && r <= 2) {
+            if (x <= 0) {cx = 0.0005f;}
+            else if (x >= 1) {cx = -0.0005f;}
+            x += cx;
+        }
+        if (r >= 2 && r <= 5) {
+            if (y <= 0) {cy = 0.0005f;}
+            else if (y >= 1) {cy = -0.0005f;}
+            y += cy;
+        }
+        if (r >= 6 && r <= 8) {
+            if (z <= 0) {cz = 0.0005f;}
+            else if (z >= 1) {cz = -0.0005f;}
+            z += cz;
         }
 
         glfwPollEvents();
@@ -175,7 +213,7 @@ int main() {
         projection = glm::perspective(glm::radians(zoom), (float)WIDTH / (float)HEIGHT, 0.1f, 100.0f);
 /*
         view = glm::lookAt(
-        glm::vec3(4,3,3), // Camera is at (4,3,3), in World Space
+        glm::vec3(8,6,6), // Camera is at (4,3,3), in World Space
         glm::vec3(0,0,0), // and looks at the origin
         glm::vec3(0,1,0)  // Head is up (set to 0,-1,0 to look upside-down)
         );
@@ -185,7 +223,6 @@ int main() {
         model = glm::translate(model, glm::vec3(0.0f, dy, 0.0f));
         model *= glm::rotate(model, (GLfloat)glfwGetTime() * -1.0f, glm::vec3(x, y, z));
 
-
         glm::mat4 MVP = projection * view * model;
 
         GLint mvpLoc = glGetUniformLocation(ourShader.Program, "MVP");
@@ -194,6 +231,15 @@ int main() {
 
         glBindVertexArray(VAO0);
         glDrawArrays(GL_QUADS, 0, 24);
+        //glDrawElements(GL_QUADS, 24, GL_UNSIGNED_SHORT, 0);
+
+        MVP = projection * view * glm::mat4(1.0f);
+
+        glUniformMatrix4fv(mvpLoc, 1, GL_FALSE, glm::value_ptr(MVP));
+
+        glBindVertexArray(VAO1);
+        glDrawArrays(GL_QUADS, 0, 4);
+
         glBindVertexArray(0);
         glfwSwapBuffers(window);
     }
@@ -205,16 +251,26 @@ int main() {
 
 void KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mode)
 {
-    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS){
-		glfwSetWindowShouldClose(window, GL_TRUE);
-	}
+    if(key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {glfwSetWindowShouldClose(window, GL_TRUE);}
 
-    if(key == GLFW_KEY_W){position += MOVEMENT_SPEED * viewDirection;    cout << "W Pressed" << endl;}
-    if(key == GLFW_KEY_S){position -= MOVEMENT_SPEED * viewDirection;    cout << "S Pressed" << endl;}
-    if(key == GLFW_KEY_A){position -= MOVEMENT_SPEED * strafeDirection;  cout << "A Pressed" << endl;}
-    if(key == GLFW_KEY_D){position += MOVEMENT_SPEED * strafeDirection;  cout << "D Pressed" << endl;}
-    if(key == GLFW_KEY_Q){position += MOVEMENT_SPEED * UP;   cout << "Q Pressed" << endl;}
-    if(key == GLFW_KEY_E){position -= MOVEMENT_SPEED * UP;   cout << "E Pressed" << endl;}
+    if(key == GLFW_KEY_Q || key == GLFW_KEY_E){
+        if (key == GLFW_KEY_Q) {
+            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+            cout << "Q Pressed" << endl;
+        }
+        else if (key == GLFW_KEY_E) {
+            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+            cout << "E Pressed" << endl;
+        }
+    }
+
+    if(key == GLFW_KEY_W) {position += MOVEMENT_SPEED * viewDirection;    cout << "W Pressed" << endl;}
+    if(key == GLFW_KEY_S) {position -= MOVEMENT_SPEED * viewDirection;    cout << "S Pressed" << endl;}
+    if(key == GLFW_KEY_A) {position -= MOVEMENT_SPEED * strafeDirection;  cout << "A Pressed" << endl;}
+    if(key == GLFW_KEY_D) {position += MOVEMENT_SPEED * strafeDirection;  cout << "D Pressed" << endl;}
+    if(key == GLFW_KEY_SPACE) {position += MOVEMENT_SPEED * UP;   cout << "Space Pressed" << endl;}
+    if(key == GLFW_KEY_LEFT_SHIFT) {position -= MOVEMENT_SPEED * UP;   cout << "L Shift Pressed" << endl;}
 }
 
 void ScrollCallback(GLFWwindow *window, double xOffset, double yOffset)

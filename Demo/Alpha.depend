@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1481859246 source:d:\program\save\code blocks\semester_v\testing\alpha\alpha.cpp
+1482204999 source:d:\program\save\code blocks\semester_v\testing\alpha\alpha.cpp
 	<GL/glew.h>
 	<GL/glfw3.h>
 	<glm/glm.hpp>
@@ -8,7 +8,6 @@
 	<glm/gtc/type_ptr.hpp>
 	<iostream>
 	<stdlib.h>
-	<math.h>
 	"shader.h"
 
 1481712204 d:\program\save\code blocks\semester_v\testing\alpha\shader.h
