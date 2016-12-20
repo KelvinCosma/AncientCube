@@ -164,19 +164,6 @@ int main() {
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (void*)(3 * sizeof(GLfloat)));
     glEnableVertexAttribArray(1);
 
-
-    GLushort Sindices[] = {
-        4,5,1,0, 0,1,2,3, 1,5,6,2, 4,5,6,7, 4,0,3,7, 7,6,2,3
-    };
-
-	GLuint EAB0;
-	glGenBuffers(1, &EAB0);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EAB0);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Sindices), Sindices, GL_STATIC_DRAW);
-
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindVertexArray(0);
-
 	glm::mat4 projection;
 	projection = glm::perspective(glm::radians(45.0f), (float)WIDTH / (float)HEIGHT, 0.1f, 100.0f);
 
@@ -230,8 +217,14 @@ int main() {
             view = glm::lookAt(position, RIGHT, UP);
         }
 
-        model = glm::translate(model, glm::vec3(0.0f, dy, 0.0f));
-        model *= glm::rotate(model, (GLfloat)glfwGetTime() * -1.0f, glm::vec3(x, y, z));
+        if (!perspective) {
+            model = glm::translate(model, glm::vec3(0.0f, dy, 0.0f));
+            model *= glm::rotate(model, (GLfloat)glfwGetTime() * -1.0f, glm::vec3(x, y, z));
+        }
+
+        else {
+
+        }
 
         glm::mat4 MVP = projection * view * model;
 
@@ -243,7 +236,12 @@ int main() {
         glDrawArrays(GL_QUADS, 0, 24);
         //glDrawElements(GL_QUADS, 24, GL_UNSIGNED_SHORT, 0);
 
-        glm::mat4 idlemodel = glm::mat4(1.0f);
+        glm::mat4 idlemodel;
+
+        if (!perspective) { idlemodel = glm::mat4(1.0f); }
+        else {
+
+        }
 
         MVP = projection * view * idlemodel;
 
