@@ -12,7 +12,7 @@ class Shader
 {
 public:
     GLuint Program;
-
+    //Untuk Animasi, Perspective, Lighting
     Shader( const GLchar *vertexPath, const GLchar *fragmentPath ) {
 
         std::string vertexCode;
