@@ -1,0 +1,19 @@
+# depslib dependency file v1.0
+1482829462 source:d:\v-codeblocks\demo\ancient_cube.cpp
+	<GL/glew.h>
+	<GL/glfw3.h>
+	<glm/glm.hpp>
+	<glm/gtx/transform.hpp>
+	<glm/gtc/matrix_transform.hpp>
+	<glm/gtc/type_ptr.hpp>
+	<iostream>
+	<stdlib.h>
+	"shader.h"
+
+1482828943 d:\v-codeblocks\demo\shader.h
+	<string>
+	<fstream>
+	<sstream>
+	<iostream>
+	<GL/glew.h>
+

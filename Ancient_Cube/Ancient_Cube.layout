@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<ActiveTarget name="Debug" />
+	<File name="shader.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Ancient_Cube.cpp" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="201199" topLine="983" />
+		</Cursor>
+		<Folding>
+			<Collapse line="57" />
+			<Collapse line="150" />
+			<Collapse line="243" />
+			<Collapse line="337" />
+			<Collapse line="430" />
+			<Collapse line="523" />
+			<Collapse line="617" />
+			<Collapse line="710" />
+			<Collapse line="803" />
+			<Collapse line="897" />
+			<Collapse line="990" />
+			<Collapse line="1083" />
+			<Collapse line="1178" />
+			<Collapse line="1270" />
+			<Collapse line="1363" />
+			<Collapse line="1457" />
+			<Collapse line="1550" />
+			<Collapse line="1643" />
+			<Collapse line="1737" />
+			<Collapse line="1830" />
+			<Collapse line="1923" />
+			<Collapse line="2017" />
+			<Collapse line="2110" />
+			<Collapse line="2203" />
+			<Collapse line="2298" />
+			<Collapse line="2392" />
+			<Collapse line="2485" />
+			<Collapse line="2579" />
+			<Collapse line="2673" />
+			<Collapse line="2766" />
+			<Collapse line="2860" />
+			<Collapse line="2953" />
+			<Collapse line="3046" />
+			<Collapse line="3140" />
+			<Collapse line="3233" />
+			<Collapse line="3326" />
+			<Collapse line="3421" />
+			<Collapse line="3514" />
+			<Collapse line="3607" />
+			<Collapse line="3701" />
+			<Collapse line="3794" />
+			<Collapse line="3887" />
+			<Collapse line="3981" />
+			<Collapse line="4074" />
+			<Collapse line="4167" />
+			<Collapse line="4261" />
+			<Collapse line="4354" />
+			<Collapse line="4447" />
+			<Collapse line="4542" />
+			<Collapse line="4635" />
+			<Collapse line="4728" />
+			<Collapse line="4822" />
+			<Collapse line="4915" />
+			<Collapse line="5008" />
+			<Collapse line="5102" />
+			<Collapse line="5196" />
+			<Collapse line="5289" />
+			<Collapse line="5383" />
+			<Collapse line="5476" />
+			<Collapse line="5569" />
+			<Collapse line="5664" />
+			<Collapse line="5757" />
+			<Collapse line="5850" />
+			<Collapse line="5944" />
+			<Collapse line="6037" />
+			<Collapse line="6130" />
+			<Collapse line="6224" />
+			<Collapse line="6317" />
+			<Collapse line="6410" />
+			<Collapse line="6504" />
+			<Collapse line="6597" />
+			<Collapse line="6690" />
+			<Collapse line="6784" />
+			<Collapse line="6912" />
+			<Collapse line="7040" />
+			<Collapse line="7169" />
+			<Collapse line="7213" />
+			<Collapse line="7257" />
+			<Collapse line="7302" />
+			<Collapse line="7346" />
+			<Collapse line="7390" />
+			<Collapse line="7435" />
+			<Collapse line="7479" />
+			<Collapse line="7523" />
+			<Collapse line="7568" />
+			<Collapse line="7612" />
+			<Collapse line="7656" />
+			<Collapse line="7700" />
+			<Collapse line="7744" />
+			<Collapse line="7788" />
+		</Folding>
+	</File>
+	<File name="VertexShaderCode.vert" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="FragmentShaderCode.frag" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="273" topLine="0" />
+		</Cursor>
+	</File>
+</CodeBlocks_layout_file>
